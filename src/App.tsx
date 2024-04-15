@@ -1,11 +1,12 @@
 import { useState } from "react"
 import { Todos } from "./components/Todos"
+import { TodoTitle } from "./types"
 
 const mockTodos = [
   {
     id: 1,
     title: 'Aprender React con Typescript',
-    completed: false    
+    completed: false
   },
   {
     id: 2,
@@ -22,12 +23,22 @@ const mockTodos = [
 
 
 function App() {
+
   const [todos, setTodos] = useState(mockTodos)
+
+  const handleRemove = ({id}: TodoId): void => {
+    const newtTodos = todos.filter(todo => todo.id !== id)
+    setTodos(newtTodos)
+  }
+
+
   return (
     <div className="todoapp">
-       <Todos todos={todos} />
+      <Todos
+        onRemoveTodo={handleRemove}
+        todos={todos} />
     </div>
-  
+
   )
 }
 

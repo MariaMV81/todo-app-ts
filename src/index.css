@@ -1,0 +1,3 @@
+html{
+    filter: invert(1); /*Esto es como el dark mode pirata, pues con el mvc css que hemos instalados ya debe tener todos sus estilos de color */
+}
