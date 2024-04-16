@@ -1,4 +1,4 @@
-import { ListOfTodos, TodoId } from '../types';
+import { type Todo as TodoType, type ListOfTodos, type TodoId } from '../types';
 import { Todo } from './Todo';
 
 //Habría que tiparlo de cierta forma en la funcion, y como es muy dificil de tipar estas props,
@@ -7,13 +7,12 @@ import { Todo } from './Todo';
 //Y a la vez estas props pueden tomar cualquier forma, puede ser que le pasemos un todo o cualquier cosa, 
 //por lo tanto lo que hacemos es indicarle la forma que tiene nuestra props. 
 interface Props {
-    todos: ListOfTodos
-    onRemoveTodo: (id: TodoId ) => void
+    todos: ListOfTodos;
+    onToggleCompleteTodo: ({ id, completed }: Pick<TodoType, 'id' | 'completed'>) => void;
+    onRemoveTodo: ({ id }: TodoId) => void;
 }
 
-
-
-export const Todos: React.FC<Props> = ({ todos, onRemoveTodo }) => {
+export const Todos: React.FC<Props> = ({ todos, onToggleCompleteTodo, onRemoveTodo }) => {
     return (
         <ul className='todo-list'>
             {todos.map(todo => (
@@ -25,6 +24,7 @@ export const Todos: React.FC<Props> = ({ todos, onRemoveTodo }) => {
                         id={todo.id}
                         title={todo.title}
                         completed={todo.completed}
+                        onToggleCompleteTodo={onToggleCompleteTodo}
                         onRemoveTodo={onRemoveTodo}
                     />
                 </li>

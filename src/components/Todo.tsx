@@ -1,18 +1,24 @@
-import { TodoId, type Todo as TodoType } from '../types';
+import React from 'react';
+import { type TodoId, type Todo as TodoType } from '../types';
 
 interface Props extends TodoType {
+    onToggleCompleteTodo: ({ id, completed }: Pick<TodoType, 'id' | 'completed'>) => void;
     onRemoveTodo: ({ id }: TodoId) => void
 }
 
 
-export const Todo: React.FC<Props> = ({ id, title, completed, onRemoveTodo }) => {
+export const Todo: React.FC<Props> = ({ id, title, completed, onRemoveTodo, onToggleCompleteTodo }) => {
+    const handleChangeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) : void => {
+        onToggleCompleteTodo ({id, completed: event.target.checked})
+        
+    }
     return (
         <div className="view">
             <input
                 className="toggle"
                 type="checkbox"
                 checked={completed}
-                onChange={() => { }}
+                onChange={handleChangeCheckbox}
             />
             <label>{title}</label>
             <button
