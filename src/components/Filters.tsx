@@ -1,17 +1,14 @@
-import { FILTERS_BUTTONS, type TODO_FILTERS } from "../consts"
+import { FILTERS_BUTTONS} from "../consts"
 import { type FilterValue } from "../types"
 
 
 interface Props {
-    onFilterChange: (filter: FilterValue) => void
     filterSelected: FilterValue
+    onFilterChange: (filter: FilterValue) => void
 }
 
-export const Filters: React.FC<Props> = ({ onFilterChange, filterSelected }) => {
-    const handleClick = (filter: FilterValue) => {
-        onFilterChange(filter);
-    };
-
+export const Filters: React.FC<Props> = ({ filterSelected, onFilterChange }) => {
+    
     return (
         <ul className="filters">
             {Object.entries(FILTERS_BUTTONS).map(([key, { href, literal }]) => {
@@ -22,34 +19,18 @@ export const Filters: React.FC<Props> = ({ onFilterChange, filterSelected }) => 
                     <li key={key}>
                         <a
                             href={href}
-                            onClick={() => handleClick(key)}
-                            className={className}>
+                            className={className}
+                            onClick={(event) => {
+                                event.preventDefault()
+                                onFilterChange(key as FilterValue)
+                            }}
+
+                        >
                             {literal}
                         </a>
                     </li>
                 );
             })}
-            <li>
-                <a
-                    className={`${filterSelected === 'all' ? 'selected' : ''}`}
-                    onClick={() => onFilterChange('all')}>
-                    Todas
-                </a>
-            </li>
-            <li>
-                <a
-                    className={`${filterSelected === 'active' ? 'selected' : ''}`}
-                    onClick={() => onFilterChange('active')}>
-                    Activas
-                </a>
-            </li>
-            <li>
-                <a
-                    className={`${filterSelected === 'completed' ? 'selected' : ''}`}
-                    onClick={() => onFilterChange('completed')}>
-                    Completadas
-                </a>
-            </li>
         </ul>
     );
 };

@@ -3,7 +3,7 @@ import { Filters } from './Filters';
 
 interface Props {
     activeCount: number;
-    completeCound: number;
+    completedCount: number;
     filterSelected: FilterValue;
     handleFilterChange?: (filter: FilterValue) => void | null;
     onClearCompleted: () => void;
