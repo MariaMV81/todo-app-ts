@@ -11,8 +11,11 @@ export const Filters: React.FC<Props> = ({ filterSelected, onFilterChange }) => 
     
     return (
         <ul className="filters">
+            {/* Mapea sobre cada entrada en el objeto FILTERS_BUTTONS */}
             {Object.entries(FILTERS_BUTTONS).map(([key, { href, literal }]) => {
+                // Determina si el filtro actual es el seleccionado.
                 const isSelected = key === filterSelected;
+                // Define la clase CSS a aplicar según si el filtro está seleccionado.
                 const className = isSelected ? 'selected' : '';
 
                 return (
@@ -26,7 +29,7 @@ export const Filters: React.FC<Props> = ({ filterSelected, onFilterChange }) => 
                             }}
 
                         >
-                            {literal}
+                            {literal}  {/* Renderiza el texto del filtro. */}
                         </a>
                     </li>
                 );

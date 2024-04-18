@@ -4,6 +4,7 @@ import { TodoTitle, type TodoId, type Todo as TodoType } from "./types"
 import { Footer } from "./components/Footer"
 import { TODO_FILTERS } from "./consts"
 import { Header } from "./components/Header"
+import { FilterValue } from "./types"
 
 
 const mockTodos = [
@@ -36,9 +37,7 @@ const App = (): JSX.Element => {
     setTodos(newtTodos)
   }
 
-  const handleComplete = (
-    { id, completed }: { id: number; completed: boolean }
-  ): void => {
+  const handleComplete = ({ id, completed }: Pick<TodoType, 'id' | 'completed'>): void => {
     const newTodos = todos.map(todo => {
       if (todo.id === id) {
         return {
@@ -59,11 +58,13 @@ const App = (): JSX.Element => {
   const handleRemoveAllCompleted = (): void => {
 
     const newTodos = todos.filter(todo => !todo.completed)
+
+    console.log("handleRemoveAllCompleted fue llamada");
     setTodos(newTodos)
   }
 
   const activeCount = todos.filter(todo => !todo.completed).length
-  const completedCount = todos.length - activeCount
+  const completedCount = todos.filter(todo => todo.completed).length;
 
   const filteredTodos = todos.filter(todo => {
     if (filterSelected === TODO_FILTERS.ACTIVE) return !todo.completed

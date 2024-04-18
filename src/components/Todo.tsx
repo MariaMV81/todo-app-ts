@@ -15,18 +15,23 @@ export const Todo: React.FC<Props> = ({ id, title, completed, onRemoveTodo, onTo
     return (
         <div className="view">
             <input
+                title="Checkbox for todo item"
                 className="toggle"
                 type="checkbox"
                 checked={completed}
                 onChange={handleChangeCheckbox}
             />
             <label>{title}</label>
+            {/* Renderiza un botón para eliminar la tarea. */}
             <button
                 className="destroy"
+                type="button"
                 onClick={() => {
+                    // Llama a la función onRemoveTodo pasando el id de la tarea.
                     onRemoveTodo ({id})
                  }}
             />
+            
         </div>
     )
 }

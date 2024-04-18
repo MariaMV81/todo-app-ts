@@ -15,7 +15,7 @@ export const Header: React.FC<Props> = ({ onAddTodo }) => {
                 src={logo}
                 />
         </h1>
-        <CreateTodo saveTodo={onAddTodo} />
+            <CreateTodo saveTodo={onAddTodo} />{/* Pasa la función onAddTodo como prop saveTodo al componente CreateTodo. */}
     </header>
     )
     
